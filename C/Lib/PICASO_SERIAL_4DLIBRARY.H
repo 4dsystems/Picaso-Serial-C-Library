@@ -1,5 +1,7 @@
 #include "Picaso_Types4D.h"			// defines data types used by the 4D Routines
 
+// SPE Version 1.1 added bus_ and pin_ functions
+
 #define   Err4D_OK      0
 #define   Err4D_Timeout 1
 #define   Err4D_NAK		2 // other than ACK received
@@ -22,6 +24,11 @@ extern int(*Callback4D) (int, unsigned char) ;	// Error callback. Set to NULL if
 extern unsigned char file_GetC(WORD  Handle) ;
 extern int OpenComm(char *comport, int newrate) ;
 extern void blitComtoDisplay(WORD  X, WORD  Y, WORD  Width, WORD  Height, t4DByteArray  Pixels);
+extern WORD bus_In(void);
+extern void bus_Out(word Bits);
+extern WORD bus_Read(void);
+extern void bus_Set(word IOMap);
+extern void bus_Write(word Bits);
 extern void file_Unmount(void);
 extern void gfx_Button(WORD  Up, WORD  x, WORD  y, WORD  buttonColour, WORD  txtColour, WORD  font, WORD  txtWidth, WORD  txtHeight, unsigned char *   text);
 extern void gfx_ChangeColour(WORD  OldColor, WORD  NewColor);
@@ -131,6 +138,10 @@ extern WORD media_WriteWord(WORD  Word);
 extern WORD media_WrSector(t4DSector  SectorOut);
 extern WORD mem_Free(WORD  Handle);
 extern WORD mem_Heap(void);
+extern WORD pin_HI(word Pin);
+extern WORD pin_LO(word Pin);
+extern WORD pin_Read(word Pin);
+extern WORD pin_Set(word Mode, word Pin);extern void putCH(WORD  WordChar) ;
 extern WORD putstr(unsigned char *  InString);
 extern WORD readString(WORD  Handle, unsigned char *  StringIn);
 extern WORD snd_Pitch(WORD  Pitch);

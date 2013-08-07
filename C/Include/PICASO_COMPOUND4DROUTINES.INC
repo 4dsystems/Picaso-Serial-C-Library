@@ -1,3 +1,61 @@
+// SPE Version 1.1 added bus_ and pin_ functions
+
+WORD bus_In()
+{
+  unsigned char  towrite[2] ;
+  DWORD  written ;
+  towrite[0]= F_bus_In >> 8 ;
+  towrite[1]= F_bus_In ;
+  WriteFile(ComHandle4D, &towrite[0], 2, &written, NULL) ;
+  return GetAckResp() ;
+}
+
+void bus_Out(WORD  Bits)
+{
+  unsigned char  towrite[4] ;
+  DWORD  written ;
+  towrite[0]= F_bus_Out >> 8 ;
+  towrite[1]= F_bus_Out ;
+  towrite[2]= Bits >> 8 ;
+  towrite[3]= Bits ;
+  WriteFile(ComHandle4D, &towrite[0], 4, &written, NULL) ;
+  GetAck() ;
+}
+
+WORD bus_Read()
+{
+  unsigned char  towrite[2] ;
+  DWORD  written ;
+  towrite[0]= F_bus_Read >> 8 ;
+  towrite[1]= F_bus_Read ;
+  WriteFile(ComHandle4D, &towrite[0], 2, &written, NULL) ;
+  return GetAckResp() ;
+}
+
+void bus_Set(WORD  IOMap)
+{
+  unsigned char  towrite[4] ;
+  DWORD  written ;
+  towrite[0]= F_bus_Set >> 8 ;
+  towrite[1]= F_bus_Set ;
+  towrite[2]= IOMap >> 8 ;
+  towrite[3]= IOMap ;
+  WriteFile(ComHandle4D, &towrite[0], 4, &written, NULL) ;
+  GetAck() ;
+}
+
+void bus_Write(WORD  Bits)
+{
+  unsigned char  towrite[4] ;
+  DWORD  written ;
+  towrite[0]= F_bus_Write >> 8 ;
+  towrite[1]= F_bus_Write ;
+  towrite[2]= Bits >> 8 ;
+  towrite[3]= Bits ;
+  WriteFile(ComHandle4D, &towrite[0], 4, &written, NULL) ;
+  GetAck() ;
+}
+
 WORD charheight(unsigned char  TestChar)
 {
   unsigned char  towrite[3] ;
@@ -1381,6 +1439,56 @@ WORD mem_Heap()
   towrite[0]= F_mem_Heap >> 8 ;
   towrite[1]= F_mem_Heap ;
   WriteFile(ComHandle4D, &towrite[0], 2, &written, NULL) ;
+  return GetAckResp() ;
+}
+
+WORD pin_HI(WORD  Pin)
+{
+  unsigned char  towrite[4] ;
+  DWORD  written ;
+  towrite[0]= F_pin_HI >> 8 ;
+  towrite[1]= F_pin_HI ;
+  towrite[2]= Pin >> 8 ;
+  towrite[3]= Pin ;
+  WriteFile(ComHandle4D, &towrite[0], 4, &written, NULL) ;
+  return GetAckResp() ;
+}
+
+WORD pin_LO(WORD  Pin)
+{
+  unsigned char  towrite[4] ;
+  DWORD  written ;
+  towrite[0]= F_pin_LO >> 8 ;
+  towrite[1]= F_pin_LO ;
+  towrite[2]= Pin >> 8 ;
+  towrite[3]= Pin ;
+  WriteFile(ComHandle4D, &towrite[0], 4, &written, NULL) ;
+  return GetAckResp() ;
+}
+
+WORD pin_Read(WORD  Pin)
+{
+  unsigned char  towrite[4] ;
+  DWORD  written ;
+  towrite[0]= F_pin_Read >> 8 ;
+  towrite[1]= F_pin_Read ;
+  towrite[2]= Pin >> 8 ;
+  towrite[3]= Pin ;
+  WriteFile(ComHandle4D, &towrite[0], 4, &written, NULL) ;
+  return GetAckResp() ;
+}
+
+WORD pin_Set(WORD  Mode, WORD  Pin)
+{
+  unsigned char  towrite[6] ;
+  DWORD  written ;
+  towrite[0]= F_pin_Set >> 8 ;
+  towrite[1]= F_pin_Set ;
+  towrite[2]= Mode >> 8 ;
+  towrite[3]= Mode ;
+  towrite[4]= Pin >> 8 ;
+  towrite[5]= Pin ;
+  WriteFile(ComHandle4D, &towrite[0], 6, &written, NULL) ;
   return GetAckResp() ;
 }
 
