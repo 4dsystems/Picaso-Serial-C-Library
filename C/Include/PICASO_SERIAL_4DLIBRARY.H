@@ -1,5 +1,6 @@
 #include "Picaso_Types4D.h"			// defines data types used by the 4D Routines
 
+// SPE Version 1.2 added peekM and pokeM
 // SPE Version 1.1 added bus_ and pin_ functions
 
 #define   Err4D_OK      0
@@ -138,10 +139,13 @@ extern WORD media_WriteWord(WORD  Word);
 extern WORD media_WrSector(t4DSector  SectorOut);
 extern WORD mem_Free(WORD  Handle);
 extern WORD mem_Heap(void);
+extern WORD peekM(WORD  Address) ;
 extern WORD pin_HI(word Pin);
 extern WORD pin_LO(word Pin);
 extern WORD pin_Read(word Pin);
-extern WORD pin_Set(word Mode, word Pin);extern void putCH(WORD  WordChar) ;
+extern WORD pin_Set(word Mode, word Pin);
+extern void putCH(WORD  WordChar) ;
+extern void pokeM(WORD  Address, WORD  WordValue) ;
 extern WORD putstr(unsigned char *  InString);
 extern WORD readString(WORD  Handle, unsigned char *  StringIn);
 extern WORD snd_Pitch(WORD  Pitch);
